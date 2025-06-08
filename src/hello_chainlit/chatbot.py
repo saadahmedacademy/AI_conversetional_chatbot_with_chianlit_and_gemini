@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv, find_dotenv
 from agents import Agent, RunConfig, AsyncOpenAI, OpenAIChatCompletionsModel, Runner
 from openai.types.responses import ResponseTextDeltaEvent
+# from agents.tool import function_tool
 
 # Load environment variables
 load_dotenv(find_dotenv())
@@ -27,10 +28,20 @@ run_config = RunConfig(
     tracing_disabled=True
 )
 
+# if we want to use custom tools , this is totally optional
+# @function_tool("get_weather")
+# def get_weather(location: str) -> str:
+#   """
+#   Fetch the weather for a given location and tell the temperature in celsius according to your current data , returning a brife description.
+#   """
+#   # Example logic
+#   return f"The weather in {location} is 22 degrees C."
+
 # Step 4: Define the agent
 agent1 = Agent(
     name="Saad Ahmed Academy's Agent",
     instructions="You are a helpful assistant that can answer questions and help with tasks.",
+    # tools= [get_weather]
 )
 
 # Step 5: Initialize chat history
